@@ -1,8 +1,48 @@
 {% extends "base.html" %}
 
 {% block main %}
-<p>Welcome to our brewsite page</p>
-<p>{{ user }}</p>
-<img src="{{ url_for('static', filename = 'images/coldbrew.png')}}" alt="Cold Glass of beer"
+<style>
+.page-layout {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.wide-image {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.middle-row {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.tall-image {
+    width: 300px;
+    height: auto;
+    flex-shrink: 0;
+}
+
+.middle-text {
+    flex: 1;
+        margin: 20px;
+}
+</style>
+<div class="page-layout">
+
+    <img src="{{ url_for('static', filename = 'images/coldbrew.png')}}" alt="Cold Glass of beer" class="wide-image">
+    
+    <div class="middle-row">
+        <img src="{{ url_for('static', filename='images/medium-vecteezy_a-glass-of-beer-puts-on-table-at-rooftop-bar-with-colorful_9333105_medium.jpg') }}" alt="Another cold glass of beer" class="tall-image">
+        <div class="middle-text">
+            <p>Welcome to our brewsite page</p>
+            <p>{{ user }}</p>
+        </div>
+    </div>
+
+    <img src="{{ url_for('static', filename='images/medium-vecteezy_beer-bottles-and-beer-goblet-on-blurred-background-of-summer_5208974_medium.jpg') }}" alt="Beer being poured into a glass with 3 more beer botles on the table" class="wide-image">
+</div>
 
 {% endblock main %}
