@@ -2,6 +2,35 @@
 
 {% block main %}
 <p>Here is our favorite breweries</p>
-<p>{{ user }}</p>
-
+<style>
+.td_bgcolor td {
+    background-color: #76a4d2;
+}    
+</style>
+<div class ="container">
+<table class="table table-bordered align-top">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Country</th>
+            <th>Address</th>
+            <th>Phone</th>
+            <th>Website</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for b in content %}
+        <tr {% if loop.index0 %2 ==1 %} class = "td_bgcolor"{% endif %}>
+            <td>{{ b.get("name") }}</td>
+            <td>{{ b.get("brewery_type") }}</td>
+            <td>{{ b.get("country") }}</td>
+            <td>{{ b.get("address_1") }}<br/>{{ b.get("city")}} {{ b.get("state_province")}} {{ b.get("postal_code")}}</td>
+            <td>{{ b.get("phone") }}</td>
+            <td>{{ b.get("website_url") }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
 {% endblock main %}
