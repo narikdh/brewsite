@@ -1,7 +1,35 @@
 {% extends "base.html" %}
 
 {% block main %}
-<p>There are multiple types of beer</p>
-<p>{{ user }}</p>
+<div class ="container">
+    {% for class_name, styles in content | rejectattr("class", "none") | groupby("class") %}
+    <h1>{{ class_name|capitalize }}</h1>
+    <ul>
+        {% for family, family_styles in styles | groupby("parent") %}
+        <li>
+            {{ family|replace("-", " ")|title }}
+            <ul>
+                {% for style in family_styles %}
+                <li>{{ style.get("name") }}</li>
+                {% endfor %}
+            </ul>
+        </li>
+        {% endfor %}
+    </ul>
+    {% endfor %}
 
+    <h1>Other Beers</h1>
+    <ul>
+        {% for family, family_styles in content | selectattr("class", "none") | groupby("parent") %}
+        <li>
+            {{ family|replace("-", " ")|title }}
+            <ul>
+                {% for style in family_styles %}
+                <li>{{ style.get("name") }}</li>
+                {% endfor %}
+            </ul>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
 {% endblock main %}
