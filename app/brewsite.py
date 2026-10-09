@@ -32,7 +32,7 @@ def beer_types(): # Renders the beer_types page using the beer_styles data fetch
     return rt("beer_types.html", content = beer_styles["data"])
 
 @app.route("/about")
-def about(): # renders teh about us page
+def about(): # renders the about us page
     return rt("about.html", user = "Nick Cessac")
 
 # Only run when the file is executed direction, not when being imported as a module.  
