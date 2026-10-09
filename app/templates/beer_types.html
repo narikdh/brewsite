@@ -1,7 +1,38 @@
 {% extends "base.html" %}
 
 {% block main %}
-<p>There are multiple types of beer</p>
-<p>{{ user }}</p>
 
+<div class ="container">
+    <h1>Welcome to our Beer Types</h1>
+        <p>There are many types of beer out there and it can be overwhelming to understand what they are.  Here is a semi-comprehensive list of the different types of beer as provided by https://catalog.beer</p>
+    {% for class_name, styles in content | rejectattr("class", "none") | groupby("class") %}
+    <h2>{{ class_name|capitalize }}s</h2>
+    <ul>
+        {% for family, family_styles in styles | groupby("parent") %}
+        <li>
+            <h3>{{ family|replace("-", " ")|title }}</h3>
+            <ul>
+                {% for style in family_styles %}
+                <li>{{ style.get("name") }}</li>
+                {% endfor %}
+            </ul>
+        </li>
+        {% endfor %}
+    </ul>
+    {% endfor %}
+
+    <h2>Other Beers</h2>
+    <ul>
+        {% for family, family_styles in content | selectattr("class", "none") | groupby("parent") %}
+        <li>
+            {{ family|replace("-", " ")|title }}
+            <ul>
+                {% for style in family_styles %}
+                <li>{{ style.get("name") }}</li>
+                {% endfor %}
+            </ul>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
 {% endblock main %}
